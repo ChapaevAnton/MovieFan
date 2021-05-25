@@ -41,6 +41,7 @@
                 android:id="@+id/image1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/top_bar_image1"
                 android:scaleType="centerCrop"
                 android:src="@drawable/image1" />
         </androidx.cardview.widget.CardView>
@@ -64,6 +65,7 @@
                 android:id="@+id/image2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/top_bar_image2"
                 android:scaleType="centerCrop"
                 android:src="@drawable/image2" />
         </androidx.cardview.widget.CardView>
@@ -87,6 +89,7 @@
                 android:id="@+id/image3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/top_bar_image3"
                 android:scaleType="centerCrop"
                 android:src="@drawable/image3" />
         </androidx.cardview.widget.CardView>
@@ -110,6 +113,7 @@
                 android:id="@+id/image4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/top_bar_image4"
                 android:scaleType="centerCrop"
                 android:src="@drawable/image4" />
         </androidx.cardview.widget.CardView>

@@ -5,4 +5,8 @@
     <string name="main_menu_watch_later">Посмотреть позже</string>
     <string name="main_menu_my_selections">Мои подборки</string>
     <string name="main_menu_settings">Настройки</string>
+    <string name="top_bar_image4">фильм 4</string>
+    <string name="top_bar_image3">фильм 3</string>
+    <string name="top_bar_image2">фильм 2</string>
+    <string name="top_bar_image1">фильм 1</string>
 </resources>
