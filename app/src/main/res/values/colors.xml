@@ -9,7 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="temp_color1">#787676</color>
     <color name="temp_color2">#4A4747</color>
-    <color name="ivi_head_menu">#100E19</color>
+    <color name="ivi_head_menu_start">#100E19</color>
+    <color name="ivi_head_menu_end">#1F1B2E</color>
     <color name="ivi_button_menu_blue">#1F1B2E</color>
     <color name="ivi_button_menu_red">#EA0042</color>
 

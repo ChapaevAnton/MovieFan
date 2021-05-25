@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@color/ivi_head_menu" />
-    <corners
-        android:radius="5dp"/>
+    <gradient
+        android:endColor="@color/ivi_head_menu_end"
+        android:startColor="@color/ivi_head_menu_start"/>
 </shape>
