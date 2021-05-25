@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MovieFan</string>
+    <string name="main_menu_home">Мой MF</string>
+    <string name="main_menu_favorites">Избранное</string>
+    <string name="main_menu_watch_later">Посмотреть позже</string>
+    <string name="main_menu_my_selections">Мои подборки</string>
+    <string name="main_menu_settings">Настройки</string>
 </resources>

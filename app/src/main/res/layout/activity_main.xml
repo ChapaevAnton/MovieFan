@@ -6,38 +6,83 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <FrameLayout
-        android:id="@+id/topBar"
+        android:id="@+id/main_topBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/temp_color1"
-        app:layout_constraintBottom_toTopOf="@+id/menu"
+        app:layout_constraintBottom_toTopOf="@+id/main_bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <LinearLayout
-        android:id="@+id/menu"
+        android:id="@+id/main_menu"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="50dp"
-        android:background="@color/temp_color2"
+        android:background="@drawable/main_menu_background_shape"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+        app:layout_constraintTop_toBottomOf="@+id/main_topBar">
+
+        <Button
+            android:id="@+id/main_menu_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ivi_button_menu_blue"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/main_menu_home" />
+
+        <Button
+            android:id="@+id/main_menu_favorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ivi_button_menu_blue"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/main_menu_favorites" />
+
+        <Button
+            android:id="@+id/main_menu_watch_later"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ivi_button_menu_blue"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/main_menu_watch_later" />
+
+        <Button
+            android:id="@+id/main_menu_home_my_selections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ivi_button_menu_blue"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/main_menu_my_selections" />
+
+        <Button
+            android:id="@+id/main_menu_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ivi_button_menu_blue"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/main_menu_settings" />
+
+    </LinearLayout>
 
 
     <FrameLayout
-        android:id="@+id/bottomBar"
+        android:id="@+id/main_bottomBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/temp_color1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu" />
+        app:layout_constraintTop_toBottomOf="@+id/main_topBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
