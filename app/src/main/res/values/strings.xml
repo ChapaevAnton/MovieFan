@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieFan</string>
+    <string name="app_name">Movie Fan</string>
     <string name="main_menu_home">Мой MF</string>
     <string name="main_menu_favorites">Избранное</string>
     <string name="main_menu_watch_later">Посмотреть позже</string>
