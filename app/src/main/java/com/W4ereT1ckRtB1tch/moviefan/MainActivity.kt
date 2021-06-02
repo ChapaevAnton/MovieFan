@@ -14,8 +14,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //контейнер для snackbar
         val coordinatorSnackBar = findViewById<CoordinatorLayout>(R.id.coordinator_snack_bar_main)
 
+        //обработчик выбора пунктов меню Navigation Bottom
         val menuMainNavigationBottom =
             findViewById<BottomNavigationView>(R.id.menu_main_navigation_bottom_bar)
         menuMainNavigationBottom.setOnNavigationItemSelectedListener { item ->
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    //функция отображения snackbar с заданной позицией и цветом
     private fun showSnackBar(view: View, text: Int) {
         Snackbar.make(view, text, Snackbar.LENGTH_LONG).also {
             val coordinatorView = it.view
