@@ -30,23 +30,29 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.main_menu_favorites -> {
+                    showSnackBar(coordinatorSnackBar, R.string.main_menu_favorites)
+                    true
+                }
+
+                R.id.main_menu_profile -> {
+                    showSnackBar(coordinatorSnackBar, R.string.main_menu_profile)
+                    true
+                }
                 else -> false
             }
         }
-
     }
 
 
     private fun showSnackBar(view: View, text: Int) {
-
-
-        val snackBar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
-        val coordinatorView = snackBar.view
-        val paramsView:CoordinatorLayout.LayoutParams = coordinatorView.layoutParams as CoordinatorLayout.LayoutParams
-        paramsView.gravity = Gravity.TOP
-        coordinatorView.layoutParams = paramsView
-        snackBar.setBackgroundTint(ContextCompat.getColor(view.context, R.color.ivi_blue)).show()
-
+        Snackbar.make(view, text, Snackbar.LENGTH_LONG).also {
+            val coordinatorView = it.view
+            val paramsView: CoordinatorLayout.LayoutParams =
+                coordinatorView.layoutParams as CoordinatorLayout.LayoutParams
+            paramsView.gravity = Gravity.CENTER
+            coordinatorView.layoutParams = paramsView
+        }.setBackgroundTint(ContextCompat.getColor(view.context, R.color.ivi_blue)).show()
     }
 
 }
