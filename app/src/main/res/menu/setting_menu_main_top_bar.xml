@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/main_topBar_setting"
-        android:contentDescription="@string/main_topBar_setting"
+        android:contentDescription="@string/main_menu_settings"
         android:icon="@drawable/ic_round_more_setting_24"
-        android:title="@string/main_topBar_setting"
+        android:title="@string/main_menu_settings"
         app:showAsAction="ifRoom" />
 
 </menu>
