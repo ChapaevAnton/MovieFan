@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -16,10 +17,24 @@ class MainActivity : AppCompatActivity() {
 
         //контейнер для snackbar
         val coordinatorSnackBar = findViewById<CoordinatorLayout>(R.id.coordinator_snack_bar_main)
-
-        //обработчик выбора пунктов меню Navigation Bottom
+        //верхнее меню
+        val mainMenuTopBar = findViewById<MaterialToolbar>(R.id.main_menu_top_bar)
+        //нижнее меню
         val menuMainNavigationBottom =
             findViewById<BottomNavigationView>(R.id.menu_main_navigation_bottom_bar)
+
+        //обработчик выбора пунктов меню Top Bar
+        mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.main_menu_setting -> {
+                    showSnackBar(coordinatorSnackBar, R.string.main_menu_settings)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        //обработчик выбора пунктов меню Navigation Bottom
         menuMainNavigationBottom.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.main_menu_home -> {
