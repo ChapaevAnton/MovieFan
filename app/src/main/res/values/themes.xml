@@ -12,10 +12,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
-        <!-- Regular top app bar tools-->
-
-
-
     </style>
+
+    <!-- Bottom navigation menu main-->
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/ivi_red</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+    <!-- Bottom navigation menu main-->
+
+
 </resources>
