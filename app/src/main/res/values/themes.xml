@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MovieFan" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.MovieFan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/ivi_red</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!-- Regular top app bar tools-->
+
+
+
     </style>
 </resources>

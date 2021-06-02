@@ -9,4 +9,5 @@
     <string name="top_bar_image3">фильм 3</string>
     <string name="top_bar_image2">фильм 2</string>
     <string name="top_bar_image1">фильм 1</string>
+    <string name="main_topBar_setting">Настройки</string>
 </resources>
