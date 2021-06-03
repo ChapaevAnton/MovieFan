@@ -2,7 +2,7 @@ package com.W4ereT1ckRtB1tch.moviefan
 
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -15,8 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //контейнер для snackbar
-        val coordinatorSnackBar = findViewById<CoordinatorLayout>(R.id.coordinator_snack_bar_main)
         //верхнее меню
         val mainMenuTopBar = findViewById<MaterialToolbar>(R.id.main_menu_top_bar)
         //нижнее меню
@@ -27,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.main_menu_setting -> {
-                    showSnackBar(coordinatorSnackBar, R.string.main_menu_settings)
+                    showSnackBar(R.string.main_menu_settings)
                     true
                 }
                 else -> false
@@ -38,22 +36,22 @@ class MainActivity : AppCompatActivity() {
         menuMainNavigationBottom.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.main_menu_home -> {
-                    showSnackBar(coordinatorSnackBar, R.string.main_menu_home)
+                    showSnackBar(R.string.main_menu_home)
                     true
                 }
 
                 R.id.main_menu_my_selections -> {
-                    showSnackBar(coordinatorSnackBar, R.string.main_menu_my_selections)
+                    showSnackBar(R.string.main_menu_my_selections)
                     true
                 }
 
                 R.id.main_menu_favorites -> {
-                    showSnackBar(coordinatorSnackBar, R.string.main_menu_favorites)
+                    showSnackBar(R.string.main_menu_favorites)
                     true
                 }
 
                 R.id.main_menu_profile -> {
-                    showSnackBar(coordinatorSnackBar, R.string.main_menu_profile)
+                    showSnackBar(R.string.main_menu_profile)
                     true
                 }
                 else -> false
@@ -62,14 +60,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     //функция отображения snackbar с заданной позицией и цветом
-    private fun showSnackBar(view: View, text: Int) {
-        Snackbar.make(view, text, Snackbar.LENGTH_LONG).also {
-            val coordinatorView = it.view
+    private fun showSnackBar(text: Int) {
+        val viewSnackBar = findViewById<CoordinatorLayout>(R.id.frame_snack_bar_main)
+        Snackbar.make(viewSnackBar, text, Snackbar.LENGTH_LONG).also {
+            val view = it.view
             val paramsView: CoordinatorLayout.LayoutParams =
-                coordinatorView.layoutParams as CoordinatorLayout.LayoutParams
-            paramsView.gravity = Gravity.CENTER
-            coordinatorView.layoutParams = paramsView
-        }.setBackgroundTint(ContextCompat.getColor(view.context, R.color.ivi_blue)).show()
+                view.layoutParams as CoordinatorLayout.LayoutParams
+            paramsView.gravity = Gravity.BOTTOM
+            view.layoutParams = paramsView
+        }.setBackgroundTint(ContextCompat.getColor(viewSnackBar.context, R.color.ivi_blue)).show()
     }
 
 }
