@@ -13,6 +13,11 @@
     <string name="top_bar_image4">фильм 4</string>
     <string name="top_bar_image3">фильм 3</string>
     <string name="top_bar_image2">фильм 2</string>
-    <string name="top_bar_image1">фильм 1</string>
+    <string name="poster_film">постер фильма</string>
+    <string name="title_film">название фильма</string>
+    <string name="rating_film">рейтинг</string>
+    <string name="year_film">год фильма</string>
+    <string name="description_film">описание фильма</string>
+
 
 </resources>
