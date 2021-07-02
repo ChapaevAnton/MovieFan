@@ -2,15 +2,24 @@ package com.W4ereT1ckRtB1tch.moviefan
 
 import android.os.Bundle
 import android.view.Gravity
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.W4ereT1ckRtB1tch.moviefan.data.DataBase
+import com.W4ereT1ckRtB1tch.moviefan.data.Film
+import com.W4ereT1ckRtB1tch.moviefan.ui.home.CatalogFilmAdapter
+import com.W4ereT1ckRtB1tch.moviefan.ui.utils.SpacingItemDecoration
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
+
+
+    private lateinit var catalogFilmAdapter: CatalogFilmAdapter
+    private lateinit var mainRecyclerCatalogFilm: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         //нижнее меню
         val menuMainNavigationBottom =
             findViewById<BottomNavigationView>(R.id.menu_main_navigation_bottom_bar)
+        //список фильмов основной
+        mainRecyclerCatalogFilm = findViewById(R.id.main_recycler_catalog_film)
+
+        //иницилизирем список
+        initRecyclerCatalogFilm()
 
         //обработчик выбора пунктов меню Top Bar
         mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
@@ -57,6 +71,26 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    //иницилизирем список
+    private fun initRecyclerCatalogFilm() {
+        mainRecyclerCatalogFilm.apply {
+            //клик на элементе
+            catalogFilmAdapter =
+                CatalogFilmAdapter(object : CatalogFilmAdapter.OnItemFilmClickListener {
+                    override fun onClickItem(film: Film) {
+                        TODO("Not yet implemented")
+                    }
+                })
+            //устанавливаем адаптер
+            adapter = catalogFilmAdapter
+            //декоратор
+            val itemDecorator = SpacingItemDecoration(10)
+            addItemDecoration(itemDecorator)
+        }
+        //загружаем БД
+        catalogFilmAdapter.addItems(DataBase().filmDataBase)
     }
 
     //функция отображения snackbar с заданной позицией и цветом
