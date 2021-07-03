@@ -19,9 +19,6 @@
 
         <activity android:name=".ui.home.ItemFilmDetailsActivity"/>
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
