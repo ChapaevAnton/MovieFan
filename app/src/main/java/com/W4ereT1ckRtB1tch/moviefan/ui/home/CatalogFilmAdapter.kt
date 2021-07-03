@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
@@ -36,6 +37,7 @@ class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListene
         private val description: TextView = itemFilm.findViewById(R.id.description_film)
         private val year: TextView = itemFilm.findViewById(R.id.year_film)
 
+
         @RequiresApi(Build.VERSION_CODES.O)
         fun onBindItemFilm(film: Film) {
 
@@ -44,6 +46,7 @@ class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListene
             rating.text = film.rating.toString()
             description.text = film.description
             year.text = film.year.year.toString()
+
         }
     }
 
@@ -56,6 +59,7 @@ class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListene
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ItemFilmHolder, position: Int) {
         holder.onBindItemFilm(itemsFilm[position])
+        holder.itemView.setOnClickListener { onItemClickListener.onClickItem(itemsFilm[position]) }
     }
 
     override fun getItemCount(): Int {

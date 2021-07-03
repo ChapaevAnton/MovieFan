@@ -1,5 +1,6 @@
 package com.W4ereT1ckRtB1tch.moviefan
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
@@ -9,13 +10,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.data.DataBase
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.CatalogFilmAdapter
+import com.W4ereT1ckRtB1tch.moviefan.ui.home.ItemFilmDetailsActivity
 import com.W4ereT1ckRtB1tch.moviefan.ui.utils.SpacingItemDecoration
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
+
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val ITEM_FILM_DETAILS = "ITEM_FILM_DETAILS"
+    }
 
     private lateinit var catalogFilmAdapter: CatalogFilmAdapter
     private lateinit var mainRecyclerCatalogFilm: RecyclerView
@@ -80,7 +86,14 @@ class MainActivity : AppCompatActivity() {
             catalogFilmAdapter =
                 CatalogFilmAdapter(object : CatalogFilmAdapter.OnItemFilmClickListener {
                     override fun onClickItem(film: Film) {
-                        TODO("Not yet implemented")
+                        //создаем интент
+                        val intent = Intent(this@MainActivity, ItemFilmDetailsActivity::class.java)
+                        //готовим передачу данных в активити укладывая их в интент
+                        val bundle = Bundle()
+                        bundle.putParcelable(ITEM_FILM_DETAILS,film)
+                        intent.putExtras(bundle)
+                        //открываем активити
+                        startActivity(intent)
                     }
                 })
             //устанавливаем адаптер
