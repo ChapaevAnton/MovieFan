@@ -8,7 +8,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.data.DataBase
-import com.W4ereT1ckRtB1tch.moviefan.data.Film
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.CatalogFilmAdapter
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.ItemFilmDetailsActivity
 import com.W4ereT1ckRtB1tch.moviefan.ui.utils.SpacingItemDecoration
@@ -81,29 +80,28 @@ class MainActivity : AppCompatActivity() {
 
     //иницилизирем список
     private fun initRecyclerCatalogFilm() {
-        mainRecyclerCatalogFilm.apply {
-            //клик на элементе
-            catalogFilmAdapter =
-                CatalogFilmAdapter(object : CatalogFilmAdapter.OnItemFilmClickListener {
-                    override fun onClickItem(film: Film) {
-                        //создаем интент
-                        val intent = Intent(this@MainActivity, ItemFilmDetailsActivity::class.java)
-                        //готовим передачу данных в активити укладывая их в интент
-                        val bundle = Bundle()
-                        bundle.putParcelable(ITEM_FILM_DETAILS,film)
-                        intent.putExtras(bundle)
-                        //открываем активити
-                        startActivity(intent)
-                    }
-                })
-            //устанавливаем адаптер
-            adapter = catalogFilmAdapter
-            //декоратор
-            val itemDecorator = SpacingItemDecoration(10)
-            addItemDecoration(itemDecorator)
-        }
+        //создаем адаптер клик на элементе
+        catalogFilmAdapter =
+            CatalogFilmAdapter { film ->
+                //создаем интент
+                val intent = Intent(this@MainActivity, ItemFilmDetailsActivity::class.java)
+                //готовим передачу данных в активити укладывая их в интент
+                val bundle = Bundle()
+                bundle.putParcelable(ITEM_FILM_DETAILS, film)
+                intent.putExtras(bundle)
+                //открываем активити
+                startActivity(intent)
+            }
         //загружаем БД
         catalogFilmAdapter.addItems(DataBase().filmDataBase)
+        //декоратор
+        val itemDecorator = SpacingItemDecoration(10)
+
+        mainRecyclerCatalogFilm.apply {
+            //устанавливаем адаптер
+            adapter = catalogFilmAdapter
+            addItemDecoration(itemDecorator)
+        }
     }
 
     //функция отображения snackbar с заданной позицией и цветом
