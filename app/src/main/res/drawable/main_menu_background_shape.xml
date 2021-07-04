@@ -3,5 +3,5 @@
 
     <gradient
         android:endColor="@color/ivi_head_menu_end"
-        android:startColor="@color/ivi_head_menu_start"/>
+        android:startColor="@color/ivi_blue_dark"/>
 </shape>

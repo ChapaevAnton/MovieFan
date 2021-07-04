@@ -32,7 +32,6 @@ class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListene
         private val title: TextView = itemFilm.findViewById(R.id.title_film)
         private val poster: ImageView = itemFilm.findViewById(R.id.poster_film)
         private val rating: TextView = itemFilm.findViewById(R.id.rating_film)
-        private val description: TextView = itemFilm.findViewById(R.id.description_film)
         private val year: TextView = itemFilm.findViewById(R.id.year_film)
 
         @RequiresApi(Build.VERSION_CODES.O)
@@ -42,7 +41,6 @@ class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListene
                 title.text = it.title
                 poster.setImageResource(it.poster)
                 rating.text = it.rating.toString()
-                description.text = it.description
                 year.text = it.year.year.toString()
 
             }

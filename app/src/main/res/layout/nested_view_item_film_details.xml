@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_item_film_details"
-    android:background="@color/ivi_head_menu_start">
+    android:background="@color/ivi_blue_dark">
 
     <TextView
         android:id="@+id/details_description_film"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="sans-serif-medium"
-        android:padding="10dp"
+        android:padding="20dp"
         android:textColor="@color/white"
         android:textSize="16sp"
         tools:text="@tools:sample/lorem/random" />

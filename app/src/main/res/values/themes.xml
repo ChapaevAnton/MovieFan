@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MovieFan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/ivi_red</item>
+        <item name="colorPrimary">@color/ivi_blue</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
 
     <!-- Bottom navigation menu main-->
@@ -20,7 +21,7 @@
     </style>
 
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
-        <item name="colorPrimary">@color/ivi_red</item>
+        <item name="colorPrimary">@color/ivi_blue</item>
         <item name="colorOnPrimary">@color/white</item>
     </style>
     <!-- Bottom navigation menu main-->
