@@ -1,17 +1,13 @@
 package com.W4ereT1ckRtB1tch.moviefan
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.W4ereT1ckRtB1tch.moviefan.data.DataBase
-import com.W4ereT1ckRtB1tch.moviefan.ui.home.CatalogFilmAdapter
-import com.W4ereT1ckRtB1tch.moviefan.ui.home.ItemFilmDetailsActivity
-import com.W4ereT1ckRtB1tch.moviefan.ui.utils.SpacingItemDecoration
-import com.google.android.material.appbar.MaterialToolbar
+import com.W4ereT1ckRtB1tch.moviefan.data.Film
+import com.W4ereT1ckRtB1tch.moviefan.ui.home.FilmDetailsFragment
+import com.W4ereT1ckRtB1tch.moviefan.ui.home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -22,34 +18,20 @@ class MainActivity : AppCompatActivity() {
         const val ITEM_FILM_DETAILS = "ITEM_FILM_DETAILS"
     }
 
-    private lateinit var catalogFilmAdapter: CatalogFilmAdapter
-    private lateinit var mainRecyclerCatalogFilm: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //верхнее меню
-        val mainMenuTopBar = findViewById<MaterialToolbar>(R.id.main_menu_top_bar)
+        //добавление фрагмента
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.main_fragment_container, HomeFragment(), "home_fragment")
+            .commit()
+
         //нижнее меню
         val menuMainNavigationBottom =
-            findViewById<BottomNavigationView>(R.id.menu_main_navigation_bottom_bar)
-        //список фильмов основной
-        mainRecyclerCatalogFilm = findViewById(R.id.main_recycler_catalog_film)
-
-        //иницилизирем список
-        initRecyclerCatalogFilm()
-
-        //обработчик выбора пунктов меню Top Bar
-        mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.main_menu_setting -> {
-                    showSnackBar(R.string.main_menu_settings)
-                    true
-                }
-                else -> false
-            }
-        }
+            findViewById<BottomNavigationView>(R.id.main_menu_navigation_bottom_bar)
 
         //обработчик выбора пунктов меню Navigation Bottom
         menuMainNavigationBottom.setOnNavigationItemSelectedListener { item ->
@@ -78,35 +60,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //иницилизирем список
-    private fun initRecyclerCatalogFilm() {
-        //создаем адаптер клик на элементе
-        catalogFilmAdapter =
-            CatalogFilmAdapter { film ->
-                //создаем интент
-                val intent = Intent(this@MainActivity, ItemFilmDetailsActivity::class.java)
-                //готовим передачу данных в активити укладывая их в интент
-                val bundle = Bundle()
-                bundle.putParcelable(ITEM_FILM_DETAILS, film)
-                intent.putExtras(bundle)
-                //открываем активити
-                startActivity(intent)
-            }
-        //загружаем БД
-        catalogFilmAdapter.addItems(DataBase().filmDataBase)
-        //декоратор
-        val itemDecorator = SpacingItemDecoration(10)
+    //функция открытия и передачи данных фрагменту FilmDetailsFragment
+    fun launchFilmDetailsFragment(film: Film) {
+        val bundle = Bundle()
+        bundle.putParcelable(ITEM_FILM_DETAILS, film)
+        val filmDetailsFragment = FilmDetailsFragment()
+        filmDetailsFragment.arguments = bundle
 
-        mainRecyclerCatalogFilm.apply {
-            //устанавливаем адаптер
-            adapter = catalogFilmAdapter
-            addItemDecoration(itemDecorator)
-        }
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fragment_container, filmDetailsFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
-    //функция отображения snackbar с заданной позицией и цветом
-    private fun showSnackBar(text: Int) {
-        val viewSnackBar = findViewById<CoordinatorLayout>(R.id.frame_snack_bar_main)
+    //функция отображения SnackBar с заданной позицией и цветом
+    fun showSnackBar(text: Int) {
+        val viewSnackBar = findViewById<CoordinatorLayout>(R.id.main_frame_snack_bar)
         Snackbar.make(viewSnackBar, text, Snackbar.LENGTH_LONG).also {
             val view = it.view
             val paramsView: CoordinatorLayout.LayoutParams =

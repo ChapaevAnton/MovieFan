@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.home.ItemFilmDetailsActivity"/>
+        <activity android:name=".ui.home.FilmDetailsFragment"/>
 
     </application>
 
