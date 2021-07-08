@@ -1,6 +1,8 @@
 package com.W4ereT1ckRtB1tch.moviefan
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -60,6 +62,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //кнопка назад
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 0) showExitDialog() else super.onBackPressed()
+    }
+
     //функция открытия и передачи данных фрагменту FilmDetailsFragment
     fun launchFilmDetailsFragment(film: Film) {
         val bundle = Bundle()
@@ -84,6 +91,24 @@ class MainActivity : AppCompatActivity() {
             paramsView.gravity = Gravity.BOTTOM
             view.layoutParams = paramsView
         }.setBackgroundTint(ContextCompat.getColor(viewSnackBar.context, R.color.ivi_blue)).show()
+    }
+
+    private fun showExitDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this,R.style.CustomAlertDialog)
+
+        builder
+            .setTitle(R.string.exit_dialog_title)
+            .setMessage(R.string.exit_dialog_message)
+            .setPositiveButton(R.string.exit_dialog_yes) { _, _ ->
+                finish()
+            }
+            .setNegativeButton(R.string.exit_dialog_no) { dialog, _ ->
+                dialog.cancel()
+            }
+
+        val exitDialog: AlertDialog = builder.create()
+        exitDialog.setCanceledOnTouchOutside(false)
+        exitDialog.show()
     }
 
 }
