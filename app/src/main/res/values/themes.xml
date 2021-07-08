@@ -27,9 +27,20 @@
     <!-- Bottom navigation menu main-->
 
 
-    <style name="Theme.MovieFan.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <!-- Set title color -->
+    CollapsingToolbarLayout
+    <style name="ExpandedAppBar" parent="TextAppearance.MaterialComponents.Headline5">
+
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
         <item name="android:textColor">@color/white</item>
+
+    </style>
+
+
+    <style name="CollapsedAppBar" parent="TextAppearance.MaterialComponents.Headline6">
+
+        <item name="android:textColor">@color/white</item>
+
     </style>
 
 </resources>
