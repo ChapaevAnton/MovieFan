@@ -15,11 +15,10 @@ import com.W4ereT1ckRtB1tch.moviefan.ui.home.CatalogFilmAdapter.ItemFilmHolder
 class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListener) :
     RecyclerView.Adapter<ItemFilmHolder>() {
 
-    private val itemsFilm = mutableListOf<Film>()
+    private var itemsFilm = listOf<Film>()
 
     fun addItems(itemsFilm: List<Film>) {
-        this.itemsFilm.clear()
-        this.itemsFilm.addAll(itemsFilm)
+        this.itemsFilm = itemsFilm
         notifyDataSetChanged()
     }
 
@@ -33,6 +32,7 @@ class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListene
         private val poster: ImageView = itemFilm.findViewById(R.id.poster_film)
         private val rating: TextView = itemFilm.findViewById(R.id.rating_film)
         private val year: TextView = itemFilm.findViewById(R.id.year_film)
+        private val favorites: ImageView = itemFilm.findViewById(R.id.favorites_film)
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun onBindItemFilm(film: Film?, onItemClickListener: OnItemFilmClickListener) {
@@ -42,7 +42,7 @@ class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListene
                 poster.setImageResource(it.poster)
                 rating.text = it.rating.toString()
                 year.text = it.year.year.toString()
-
+                favorites.setImageResource(if (it.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)
             }
 
             itemView.setOnClickListener {

@@ -1,6 +1,7 @@
 package com.W4ereT1ckRtB1tch.moviefan.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("TAG", "onViewCreated: HomeFragment")
         //верхнее меню
         val mainMenuTopBar = view.findViewById<MaterialToolbar>(R.id.home_menu_top_bar)
         //список фильмов основной
@@ -57,7 +58,7 @@ class HomeFragment : Fragment() {
                 (requireActivity() as MainActivity).launchFilmDetailsFragment(film)
             }
         //загружаем БД
-        catalogFilmAdapter.addItems(DataBase().filmDataBase)
+        catalogFilmAdapter.addItems(DataBase.filmDataBase)
         //декоратор
         val itemDecorator = SpacingItemDecoration(10)
 
