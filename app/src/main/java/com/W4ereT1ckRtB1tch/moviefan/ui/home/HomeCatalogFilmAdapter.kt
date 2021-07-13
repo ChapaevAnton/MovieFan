@@ -10,9 +10,9 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
-import com.W4ereT1ckRtB1tch.moviefan.ui.home.CatalogFilmAdapter.ItemFilmHolder
+import com.W4ereT1ckRtB1tch.moviefan.ui.home.HomeCatalogFilmAdapter.ItemFilmHolder
 
-class CatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListener) :
+class HomeCatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListener) :
     RecyclerView.Adapter<ItemFilmHolder>() {
 
     private var itemsFilm = listOf<Film>()

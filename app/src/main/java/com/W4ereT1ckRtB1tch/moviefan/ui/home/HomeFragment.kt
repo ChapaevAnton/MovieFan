@@ -15,8 +15,23 @@ import com.google.android.material.appbar.MaterialToolbar
 
 class HomeFragment : Fragment() {
 
-    private lateinit var catalogFilmAdapter: CatalogFilmAdapter
-    private lateinit var mainRecyclerCatalogFilm: RecyclerView
+    private lateinit var homeCatalogFilmAdapter: HomeCatalogFilmAdapter
+    private lateinit var homeRecyclerCatalogFilm: RecyclerView
+    private lateinit var itemDecorator: SpacingItemDecoration
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //создаем адаптер клик на элементе
+        homeCatalogFilmAdapter =
+            HomeCatalogFilmAdapter { film ->
+                //слушатель открываем фрагмент и передаем данные
+                (requireActivity() as MainActivity).launchFilmDetailsFragment(film)
+            }
+        //загружаем БД
+        homeCatalogFilmAdapter.addItems(DataBase.filmDataBase)
+        //декоратор
+        itemDecorator = SpacingItemDecoration(10)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,41 +47,24 @@ class HomeFragment : Fragment() {
         //верхнее меню
         val mainMenuTopBar = view.findViewById<MaterialToolbar>(R.id.home_menu_top_bar)
         //список фильмов основной
-        mainRecyclerCatalogFilm = view.findViewById(R.id.home_recycler_catalog_film)
+        homeRecyclerCatalogFilm = view.findViewById(R.id.home_recycler_catalog_film)
 
         //иницилизирем список
-        initRecyclerCatalogFilm()
-
-        //обработчик выбора пунктов меню Top Bar
-        mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.main_menu_setting -> {
-                    (requireActivity() as MainActivity).showSnackBar(R.string.main_menu_settings)
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-    //иницилизирем список
-    private fun initRecyclerCatalogFilm() {
-        //создаем адаптер клик на элементе
-        catalogFilmAdapter =
-            CatalogFilmAdapter { film ->
-                //открываем фрагмент и передаем данные
-                (requireActivity() as MainActivity).launchFilmDetailsFragment(film)
-            }
-        //загружаем БД
-        catalogFilmAdapter.addItems(DataBase.filmDataBase)
-        //декоратор
-        val itemDecorator = SpacingItemDecoration(10)
-
-        mainRecyclerCatalogFilm.apply {
+        homeRecyclerCatalogFilm.apply {
             //устанавливаем адаптер
-            adapter = catalogFilmAdapter
+            adapter = homeCatalogFilmAdapter
             addItemDecoration(itemDecorator)
+
+            //обработчик выбора пунктов меню Top Bar
+            mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.main_menu_setting -> {
+                        (requireActivity() as MainActivity).showSnackBar(R.string.main_menu_settings)
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
     }
-
 }

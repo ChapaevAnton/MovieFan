@@ -2,12 +2,13 @@ package com.W4ereT1ckRtB1tch.moviefan
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
+import com.W4ereT1ckRtB1tch.moviefan.ui.favorites.FavoritesFragment
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.FilmDetailsFragment
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,15 +21,14 @@ class MainActivity : AppCompatActivity() {
         const val ITEM_FILM_DETAILS = "ITEM_FILM_DETAILS"
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //добавление фрагмента
+        //добавление default фрагмента
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.main_fragment_container, HomeFragment(), "home_fragment")
+            .replace(R.id.main_fragment_container, HomeFragment(), "home_fragment")
             .commit()
 
         //нижнее меню
@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         menuMainNavigationBottom.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.main_menu_home -> {
-                    showSnackBar(R.string.main_menu_home)
+                    switchMenuItem(HomeFragment(), "home fragment")
+                    //showSnackBar(R.string.main_menu_home)
                     true
                 }
 
@@ -49,7 +50,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.main_menu_favorites -> {
-                    showSnackBar(R.string.main_menu_favorites)
+                    switchMenuItem(FavoritesFragment(), "favorite_fragment")
+                    //showSnackBar(R.string.main_menu_favorites)
                     true
                 }
 
@@ -93,8 +95,9 @@ class MainActivity : AppCompatActivity() {
         }.setBackgroundTint(ContextCompat.getColor(viewSnackBar.context, R.color.ivi_blue)).show()
     }
 
+    //диалоговое окно выходы из приложения
     private fun showExitDialog() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this,R.style.CustomAlertDialog)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
 
         builder
             .setTitle(R.string.exit_dialog_title)
@@ -109,6 +112,14 @@ class MainActivity : AppCompatActivity() {
         val exitDialog: AlertDialog = builder.create()
         exitDialog.setCanceledOnTouchOutside(false)
         exitDialog.show()
+    }
+
+    //выбор фрагментов раздела контейнера
+    private fun switchMenuItem(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fragment_container, fragment, tag)
+            .commit()
     }
 
 }
