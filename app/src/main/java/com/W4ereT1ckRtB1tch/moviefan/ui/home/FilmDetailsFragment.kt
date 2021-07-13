@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
@@ -19,10 +21,26 @@ class FilmDetailsFragment : Fragment() {
 
     private lateinit var film: Film
 
+    private lateinit var fabClose: Animation
+    private lateinit var fabOpen: Animation
+    private lateinit var fabRotateClock: Animation
+    private lateinit var fabRotateAntiClock: Animation
+    private var isOpenDetailsFab = false
+
+    private lateinit var detailsFavoriteFab: FloatingActionButton
+    private lateinit var detailsShareFab: FloatingActionButton
+    private lateinit var detailsFab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         film = arguments?.get(MainActivity.ITEM_FILM_DETAILS) as Film
+
+        fabClose = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close_animation)
+        fabOpen = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open_animation)
+        fabRotateClock =
+            AnimationUtils.loadAnimation(requireContext(), R.anim.fab_rotate_clock_animation)
+        fabRotateAntiClock =
+            AnimationUtils.loadAnimation(requireContext(), R.anim.fab_rotate_anti_clock_animation)
     }
 
     override fun onCreateView(
@@ -36,29 +54,61 @@ class FilmDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val detailsTitle: CollapsingToolbarLayout = view.findViewById(R.id.details_title_film)
         val detailsPoster: AppCompatImageView = view.findViewById(R.id.details_poster_film)
         val detailsDescription: TextView = view.findViewById(R.id.details_description_film)
-        val detailsFavorite: FloatingActionButton = view.findViewById(R.id.details_favorites_film)
+        //fab
+        detailsFavoriteFab = view.findViewById(R.id.details_favorites_film_fab)
+        detailsShareFab = view.findViewById(R.id.details_share_film_fab)
+        detailsFab = view.findViewById(R.id.details_film_fab)
 
         film.apply {
             detailsTitle.title = title
             detailsPoster.setImageResource(poster)
             detailsDescription.text = description
-            detailsFavorite.setImageResource(if (film.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)
+            detailsFavoriteFab.setImageResource(if (film.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)
+        }
+
+        detailsFab.setOnClickListener {
+            onClickDetailsFub()
         }
 
         //добавить в избранное
-        detailsFavorite.setOnClickListener {
+        detailsFavoriteFab.setOnClickListener {
             if (film.isFavorites) {
                 film.isFavorites = false
-                detailsFavorite.setImageResource(R.drawable.ic_round_favorite_border_24)
+                detailsFavoriteFab.setImageResource(R.drawable.ic_round_favorite_border_24)
             } else {
                 film.isFavorites = true
-                detailsFavorite.setImageResource(R.drawable.ic_round_favorite_24)
+                detailsFavoriteFab.setImageResource(R.drawable.ic_round_favorite_24)
             }
             Log.d("TAG", "DataBase: ${DataBase.filmDataBase}")
+        }
+    }
+
+    private fun onClickDetailsFub() {
+        if (isOpenDetailsFab) {
+            detailsFavoriteFab.apply {
+                startAnimation(fabClose)
+                visibility = View.INVISIBLE
+            }
+            detailsShareFab.apply {
+                startAnimation(fabClose)
+                visibility = View.INVISIBLE
+            }
+            detailsFab.startAnimation(fabRotateClock)
+            isOpenDetailsFab = false
+        } else {
+            detailsFavoriteFab.apply {
+                startAnimation(fabOpen)
+                visibility = View.VISIBLE
+            }
+            detailsShareFab.apply {
+                startAnimation(fabOpen)
+                visibility = View.VISIBLE
+            }
+            detailsFab.startAnimation(fabRotateAntiClock)
+            isOpenDetailsFab = true
         }
     }
 }

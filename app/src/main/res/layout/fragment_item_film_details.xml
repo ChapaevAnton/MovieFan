@@ -42,15 +42,47 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/details_favorites_film"
+        android:id="@+id/details_share_film_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="130dp"
+        android:visibility="invisible"
         app:backgroundTint="@color/ivi_red"
-        app:layout_anchor="@id/details_film_app_bar_layout"
+        app:fabSize="mini"
+        app:layout_anchor="@id/include_nested_item_film_detail"
+        app:layout_anchorGravity="bottom|end"
+        app:rippleColor="@color/ivi_blue"
+        app:srcCompat="@drawable/ic_round_share_24"
+        app:tint="@color/white" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_favorites_film_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="80dp"
+        android:visibility="invisible"
+        app:backgroundTint="@color/ivi_red"
+        app:fabSize="mini"
+        app:layout_anchor="@id/include_nested_item_film_detail"
         app:layout_anchorGravity="bottom|end"
         app:rippleColor="@color/ivi_blue"
         app:srcCompat="@drawable/ic_round_favorite_border_24"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_film_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:backgroundTint="@color/ivi_red"
+        app:layout_anchor="@id/include_nested_item_film_detail"
+        app:layout_anchorGravity="bottom|end"
+        app:rippleColor="@color/ivi_blue"
+        app:srcCompat="@drawable/ic_round_add_24"
         app:tint="@color/white" />
 
     <include
