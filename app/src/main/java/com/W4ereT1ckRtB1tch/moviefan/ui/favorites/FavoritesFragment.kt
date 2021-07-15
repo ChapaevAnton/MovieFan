@@ -1,6 +1,7 @@
 package com.W4ereT1ckRtB1tch.moviefan.ui.favorites
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +23,11 @@ class FavoritesFragment : Fragment() {
         favoritesCatalogFilmAdapter = FavoritesCatalogFilmAdapter { film ->
             (requireActivity() as MainActivity).launchFilmDetailsFragment(film)
         }
+        //добавление элементов
         favoritesCatalogFilmAdapter.addItems(DataBase.filmDataBase.filter { it.isFavorites })
         //декоратор
         itemDecorator = SpacingItemDecoration(10)
+        Log.d("TAG", "onCreate: FavoritesFragment")
     }
 
     override fun onCreateView(
@@ -32,12 +35,14 @@ class FavoritesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("TAG", "onCreateView: FavoritesFragment")
         return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("TAG", "onViewCreated: FavoritesFragment")
 
         favoritesRecyclerCatalogFilm = view.findViewById(R.id.favorites_recycler_catalog_film)
 
@@ -47,6 +52,12 @@ class FavoritesFragment : Fragment() {
             adapter = favoritesCatalogFilmAdapter
             addItemDecoration(itemDecorator)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TAG", "onResume: FavoritesFragment")
+        favoritesCatalogFilmAdapter.updateDataItems(DataBase.filmDataBase.filter { it.isFavorites })
     }
 
 }

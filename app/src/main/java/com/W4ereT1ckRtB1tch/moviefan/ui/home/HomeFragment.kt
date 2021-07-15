@@ -67,4 +67,11 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TAG", "onResume: HomeFragment")
+        homeCatalogFilmAdapter.updateDataItems(DataBase.filmDataBase)
+    }
+
 }

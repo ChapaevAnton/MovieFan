@@ -19,6 +19,11 @@ class HomeCatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickLis
 
     fun addItems(itemsFilm: List<Film>) {
         this.itemsFilm = itemsFilm
+
+    }
+
+    fun updateDataItems(itemsFilm: List<Film>) {
+        this.itemsFilm = itemsFilm
         notifyDataSetChanged()
     }
 
