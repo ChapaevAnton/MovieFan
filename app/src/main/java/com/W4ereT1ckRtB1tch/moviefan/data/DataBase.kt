@@ -1,6 +1,5 @@
 package com.W4ereT1ckRtB1tch.moviefan.data
 
-import android.os.Build
 import com.W4ereT1ckRtB1tch.moviefan.R
 import java.time.LocalDate
 import java.time.Month
@@ -9,7 +8,7 @@ class DataBase {
 
     companion object {
 
-        val filmDataBase: List<Film> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val filmDataBase: List<Film> =
             listOf(
                 Film(
                     "Мстители: Финал", R.drawable.image1,
@@ -60,10 +59,6 @@ class DataBase {
                     8.6f, LocalDate.of(1985, Month.JULY, 3)
                 )
             )
-        } else {
-
-            TODO("VERSION.SDK_INT < O")
-        }
     }
 
 }

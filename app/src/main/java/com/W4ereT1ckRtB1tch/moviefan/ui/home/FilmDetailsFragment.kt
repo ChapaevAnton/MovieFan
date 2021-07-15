@@ -1,5 +1,7 @@
 package com.W4ereT1ckRtB1tch.moviefan.ui.home
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +10,9 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.W4ereT1ckRtB1tch.moviefan.MainActivity
 import com.W4ereT1ckRtB1tch.moviefan.R
@@ -21,11 +25,8 @@ class FilmDetailsFragment : Fragment() {
 
     private lateinit var film: Film
 
-    private lateinit var fabClose: Animation
-    private lateinit var fabOpen: Animation
     private lateinit var fabRotateClock: Animation
     private lateinit var fabRotateAntiClock: Animation
-    private var isOpenDetailsFab = false
 
     private lateinit var detailsFavoriteFab: FloatingActionButton
     private lateinit var detailsShareFab: FloatingActionButton
@@ -35,8 +36,6 @@ class FilmDetailsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         film = arguments?.get(MainActivity.ITEM_FILM_DETAILS) as Film
 
-        fabClose = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close_animation)
-        fabOpen = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open_animation)
         fabRotateClock =
             AnimationUtils.loadAnimation(requireContext(), R.anim.fab_rotate_clock_animation)
         fabRotateAntiClock =
@@ -69,6 +68,7 @@ class FilmDetailsFragment : Fragment() {
             detailsFavoriteFab.setImageResource(if (film.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)
         }
 
+        //кнопка действия fab
         detailsFab.setOnClickListener {
             onClickDetailsFub()
         }
@@ -84,31 +84,37 @@ class FilmDetailsFragment : Fragment() {
             }
             Log.d("TAG", "DataBase: ${DataBase.filmDataBase}")
         }
+
+        //поделиться информацией о фильме
+        detailsShareFab.setOnClickListener {
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Обязательно посмотри этот фильм:\n" +
+                            "Название \"${film.title}\"\n" +
+                            "Описание: ${film.description}\n" +
+                            "Год выпуска: ${film.year.year}\n" +
+                            "Рейтинг: ${film.rating}"
+                )
+                type = "text/plain"
+            }
+            startActivity(intent)
+        }
+
     }
 
     private fun onClickDetailsFub() {
-        if (isOpenDetailsFab) {
-            detailsFavoriteFab.apply {
-                startAnimation(fabClose)
-                visibility = View.INVISIBLE
-            }
-            detailsShareFab.apply {
-                startAnimation(fabClose)
-                visibility = View.INVISIBLE
-            }
+        if (detailsFavoriteFab.isVisible && detailsShareFab.isVisible) {
+            detailsFavoriteFab.hide()
+            detailsShareFab.hide()
             detailsFab.startAnimation(fabRotateClock)
-            isOpenDetailsFab = false
         } else {
-            detailsFavoriteFab.apply {
-                startAnimation(fabOpen)
-                visibility = View.VISIBLE
-            }
-            detailsShareFab.apply {
-                startAnimation(fabOpen)
-                visibility = View.VISIBLE
-            }
+            detailsFavoriteFab.show()
+            detailsShareFab.show()
             detailsFab.startAnimation(fabRotateAntiClock)
-            isOpenDetailsFab = true
         }
+
     }
+
 }
