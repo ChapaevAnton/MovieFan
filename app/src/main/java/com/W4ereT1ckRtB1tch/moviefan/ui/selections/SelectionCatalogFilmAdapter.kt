@@ -21,8 +21,9 @@ class SelectionCatalogFilmAdapter(private val onItemFilmClickListener: OnItemFil
 
     fun updateItems(listItems: List<Film>) {
         this.listItems = listItems
-
+        notifyDataSetChanged()
     }
+
 
     fun interface OnItemFilmClickListener {
         fun onClickItem(film: Film)

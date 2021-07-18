@@ -20,7 +20,9 @@
             android:id="@+id/selections_search_top_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/CustomSearchView" />
+            android:theme="@style/CustomSearchView"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search_view_hint" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

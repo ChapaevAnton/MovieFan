@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.MainActivity
@@ -41,11 +42,32 @@ class SelectionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         selectionRecyclerCatalogFilm = view.findViewById(R.id.selections_recycler_catalog_film)
+        val selectionsSearch = view.findViewById<SearchView>(R.id.selections_search_top_bar)
 
         selectionRecyclerCatalogFilm.apply {
             adapter = selectionCatalogFilmAdapter
             addItemDecoration(itemDecorator)
         }
+
+        selectionsSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                newText?.let {
+                    if (it.isEmpty()) {
+                        selectionCatalogFilmAdapter.updateItems(DataBase.filmDataBase)
+                        return true
+                    }
+                    selectionCatalogFilmAdapter.updateItems(DataBase.filmDataBase.filter { film ->
+                        film.title.lowercase().contains(it.lowercase())
+                    })
+                }
+                return true
+            }
+        })
     }
 
 
@@ -53,5 +75,6 @@ class SelectionsFragment : Fragment() {
         super.onResume()
         selectionCatalogFilmAdapter.updateItems(DataBase.filmDataBase)
     }
+
 
 }

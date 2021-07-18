@@ -25,4 +25,8 @@
     <string name="exit_dialog_yes">Да</string>
     <string name="exit_dialog_no">Нет</string>
 
+<!--    selection fragment-->
+    <string name="search_view_hint">Найти фильм</string>
+
+
 </resources>

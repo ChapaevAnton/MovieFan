@@ -49,7 +49,7 @@
     <!--    CustomSearchView-->
     <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
         <!-- Text Size -->
-
+        <item name="android:fontFamily">sans-serif-medium</item>
         <!-- Query Text Color -->
         <item name="android:textColorPrimary">@color/white</item>
         <!-- Hint Color -->
