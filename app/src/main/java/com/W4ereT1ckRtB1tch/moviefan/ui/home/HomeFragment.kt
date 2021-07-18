@@ -54,18 +54,19 @@ class HomeFragment : Fragment() {
             //устанавливаем адаптер
             adapter = homeCatalogFilmAdapter
             addItemDecoration(itemDecorator)
+        }
 
-            //обработчик выбора пунктов меню Top Bar
-            mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.main_menu_setting -> {
-                        (requireActivity() as MainActivity).showSnackBar(R.string.main_menu_settings)
-                        true
-                    }
-                    else -> false
+        //обработчик выбора пунктов меню Top Bar
+        mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.main_menu_setting -> {
+                    (requireActivity() as MainActivity).showSnackBar(R.string.main_menu_settings)
+                    true
                 }
+                else -> false
             }
         }
+
     }
 
     override fun onResume() {
