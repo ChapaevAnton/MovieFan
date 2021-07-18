@@ -8,8 +8,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
+import com.W4ereT1ckRtB1tch.moviefan.ui.selections.SelectionsFragment
 import com.W4ereT1ckRtB1tch.moviefan.ui.favorites.FavoritesFragment
-import com.W4ereT1ckRtB1tch.moviefan.ui.home.FilmDetailsFragment
+import com.W4ereT1ckRtB1tch.moviefan.ui.details.FilmDetailsFragment
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -45,7 +46,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.main_menu_my_selections -> {
-                    showSnackBar(R.string.main_menu_my_selections)
+                    switchMenuItem(SelectionsFragment(),"selections_fragment")
+                    //showSnackBar(R.string.main_menu_my_selections)
                     true
                 }
 
