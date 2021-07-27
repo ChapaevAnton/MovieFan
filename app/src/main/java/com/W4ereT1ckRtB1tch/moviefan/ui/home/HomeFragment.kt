@@ -16,11 +16,19 @@ import com.google.android.material.appbar.MaterialToolbar
 class HomeFragment : Fragment() {
 
     private lateinit var homeCatalogFilmAdapter: HomeCatalogFilmAdapter
+    private lateinit var listRecommendAdapter: ListRecommendAdapter
+    private lateinit var homeRecyclerListRecommend: RecyclerView
     private lateinit var homeRecyclerCatalogFilm: RecyclerView
     private lateinit var itemDecorator: SpacingItemDecoration
+    private lateinit var itemDecoratorMini: SpacingItemDecoration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //список рекомендации
+        listRecommendAdapter = ListRecommendAdapter()
+        listRecommendAdapter.addItems(DataBase.filmDataBase.take(6))
+
+        //каталог фильмов
         //создаем адаптер клик на элементе
         homeCatalogFilmAdapter =
             HomeCatalogFilmAdapter { film ->
@@ -31,6 +39,7 @@ class HomeFragment : Fragment() {
         homeCatalogFilmAdapter.addItems(DataBase.filmDataBase)
         //декоратор
         itemDecorator = SpacingItemDecoration(10)
+        itemDecoratorMini = SpacingItemDecoration(5)
     }
 
     override fun onCreateView(
@@ -46,9 +55,15 @@ class HomeFragment : Fragment() {
         Log.d("TAG", "onViewCreated: HomeFragment")
         //верхнее меню
         val mainMenuTopBar = view.findViewById<MaterialToolbar>(R.id.home_menu_top_bar)
+        //список рекомендации
+        homeRecyclerListRecommend = view.findViewById(R.id.home_recycler_list_recommend)
+        homeRecyclerListRecommend.apply {
+            adapter = listRecommendAdapter
+            addItemDecoration(itemDecoratorMini)
+        }
+
         //список фильмов основной
         homeRecyclerCatalogFilm = view.findViewById(R.id.home_recycler_catalog_film)
-
         //иницилизирем список
         homeRecyclerCatalogFilm.apply {
             //устанавливаем адаптер

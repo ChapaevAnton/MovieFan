@@ -2,11 +2,13 @@ package com.W4ereT1ckRtB1tch.moviefan
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
 import com.W4ereT1ckRtB1tch.moviefan.ui.selections.SelectionsFragment
 import com.W4ereT1ckRtB1tch.moviefan.ui.favorites.FavoritesFragment
@@ -27,10 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //добавление default фрагмента
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_fragment_container, HomeFragment(), "home_fragment")
-            .commit()
+        switchMenuItem(HomeFragment(), "home fragment")
 
         //нижнее меню
         val menuMainNavigationBottom =
