@@ -2,7 +2,6 @@ package com.W4ereT1ckRtB1tch.moviefan.ui.home
 
 import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -31,13 +30,15 @@ class HomeCatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickLis
         fun onClickItem(film: Film)
     }
 
-    inner class ItemFilmHolder(itemFilm: View) : RecyclerView.ViewHolder(itemFilm) {
 
-        private val title: TextView = itemFilm.findViewById(R.id.title_film)
-        private val poster: ImageView = itemFilm.findViewById(R.id.poster_film)
-        private val rating: TextView = itemFilm.findViewById(R.id.rating_film)
-        private val year: TextView = itemFilm.findViewById(R.id.year_film)
-        private val favorites: ImageView = itemFilm.findViewById(R.id.favorites_film)
+    inner class ItemFilmHolder(layoutInflater: LayoutInflater, parent: ViewGroup) :
+        RecyclerView.ViewHolder(layoutInflater.inflate(R.layout.item_film, parent, false)) {
+
+        private val title: TextView = itemView.findViewById(R.id.title_film)
+        private val poster: ImageView = itemView.findViewById(R.id.poster_film)
+        private val rating: TextView = itemView.findViewById(R.id.rating_film)
+        private val year: TextView = itemView.findViewById(R.id.year_film)
+        private val favorites: ImageView = itemView.findViewById(R.id.favorites_film)
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun onBindItemFilm(film: Film?, onItemClickListener: OnItemFilmClickListener) {
@@ -59,9 +60,8 @@ class HomeCatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickLis
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemFilmHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_film, parent, false)
-        return ItemFilmHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return ItemFilmHolder(layoutInflater, parent)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
