@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ivi_blue_dark"
-    tools:context=".ui.favorites.FavoritesFragment">
+    android:visibility="invisible"
+    tools:context=".ui.favorites.FavoritesFragment"
+    tools:visibility="visible">
 
     <!--    RecyclerView layout-->
     <androidx.recyclerview.widget.RecyclerView

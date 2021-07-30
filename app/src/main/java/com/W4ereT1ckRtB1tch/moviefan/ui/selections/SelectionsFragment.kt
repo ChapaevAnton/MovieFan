@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.MainActivity
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.DataBase
+import com.W4ereT1ckRtB1tch.moviefan.ui.utils.AnimationHelper
 import com.W4ereT1ckRtB1tch.moviefan.ui.utils.SpacingItemDecoration
 
 class SelectionsFragment : Fragment() {
@@ -40,6 +41,8 @@ class SelectionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //анимация открытия фрагмента
+        AnimationHelper.performFragmentCircularRevealAnimation(view, requireActivity(), 2)
 
         selectionRecyclerCatalogFilm = view.findViewById(R.id.selections_recycler_catalog_film)
         val selectionsSearch = view.findViewById<SearchView>(R.id.selections_search_top_bar)

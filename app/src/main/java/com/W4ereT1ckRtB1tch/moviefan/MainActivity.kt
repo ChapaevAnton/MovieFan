@@ -2,18 +2,17 @@ package com.W4ereT1ckRtB1tch.moviefan
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.transition.TransitionInflater
+import android.util.Log
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
-import com.W4ereT1ckRtB1tch.moviefan.ui.selections.SelectionsFragment
-import com.W4ereT1ckRtB1tch.moviefan.ui.favorites.FavoritesFragment
 import com.W4ereT1ckRtB1tch.moviefan.ui.details.FilmDetailsFragment
+import com.W4ereT1ckRtB1tch.moviefan.ui.favorites.FavoritesFragment
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.HomeFragment
+import com.W4ereT1ckRtB1tch.moviefan.ui.selections.SelectionsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -22,6 +21,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val ITEM_FILM_DETAILS = "ITEM_FILM_DETAILS"
+        const val HOME_FRAGMENT_TAG = "home_fragment"
+        const val SELECTIONS_FRAGMENT_TAG = "selections_fragment"
+        const val FAVORITES_FRAGMENT_TAG = "favorite_fragment"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +31,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //добавление default фрагмента
-        switchMenuItem(HomeFragment(), "home fragment")
+        val fragmentManager = supportFragmentManager
+        var fragment: Fragment? = fragmentManager.findFragmentById(R.id.main_fragment_container)
 
+        if (fragment == null) {
+            fragment = HomeFragment()
+            fragmentManager.beginTransaction()
+                .add(R.id.main_fragment_container, fragment, HOME_FRAGMENT_TAG)
+                .commit()
+        }
         //нижнее меню
         val menuMainNavigationBottom =
             findViewById<BottomNavigationView>(R.id.main_menu_navigation_bottom_bar)
@@ -39,19 +48,28 @@ class MainActivity : AppCompatActivity() {
         menuMainNavigationBottom.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.main_menu_home -> {
-                    switchMenuItem(HomeFragment(), "home fragment")
+                    switchFragmentMenu(
+                        checkFragmentExistence(HOME_FRAGMENT_TAG) ?: HomeFragment(),
+                        HOME_FRAGMENT_TAG
+                    )
                     //showSnackBar(R.string.main_menu_home)
                     true
                 }
 
                 R.id.main_menu_my_selections -> {
-                    switchMenuItem(SelectionsFragment(),"selections_fragment")
+                    switchFragmentMenu(
+                        checkFragmentExistence(SELECTIONS_FRAGMENT_TAG) ?: SelectionsFragment(),
+                        SELECTIONS_FRAGMENT_TAG
+                    )
                     //showSnackBar(R.string.main_menu_my_selections)
                     true
                 }
 
                 R.id.main_menu_favorites -> {
-                    switchMenuItem(FavoritesFragment(), "favorite_fragment")
+                    switchFragmentMenu(
+                        checkFragmentExistence(FAVORITES_FRAGMENT_TAG) ?: FavoritesFragment(),
+                        FAVORITES_FRAGMENT_TAG
+                    )
                     //showSnackBar(R.string.main_menu_favorites)
                     true
                 }
@@ -116,11 +134,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     //выбор фрагментов раздела контейнера
-    private fun switchMenuItem(fragment: Fragment, tag: String) {
+    private fun switchFragmentMenu(fragment: Fragment, tag: String) {
+        Log.d("TAG", "switchFragmentMenu: $tag")
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.main_fragment_container, fragment, tag)
             .commit()
+
+    }
+
+    private fun checkFragmentExistence(tag: String): Fragment? {
+        return supportFragmentManager.findFragmentByTag(tag)
     }
 
 }

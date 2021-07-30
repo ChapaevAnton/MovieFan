@@ -5,11 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.MainActivity
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.DataBase
+import com.W4ereT1ckRtB1tch.moviefan.ui.utils.AnimationHelper
 import com.W4ereT1ckRtB1tch.moviefan.ui.utils.SpacingItemDecoration
 import com.google.android.material.appbar.MaterialToolbar
 
@@ -53,6 +55,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("TAG", "onViewCreated: HomeFragment")
+        //анимация открытия фрагмента
+        AnimationHelper.performFragmentCircularRevealAnimation(view,requireActivity(),1)
         //верхнее меню
         val mainMenuTopBar = view.findViewById<MaterialToolbar>(R.id.home_menu_top_bar)
         //список рекомендации

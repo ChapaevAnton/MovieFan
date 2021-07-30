@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.MainActivity
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.DataBase
+import com.W4ereT1ckRtB1tch.moviefan.ui.utils.AnimationHelper
 import com.W4ereT1ckRtB1tch.moviefan.ui.utils.SpacingItemDecoration
 
 class FavoritesFragment : Fragment() {
@@ -43,6 +44,8 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("TAG", "onViewCreated: FavoritesFragment")
+        //анимация открытия фрагмента
+        AnimationHelper.performFragmentCircularRevealAnimation(view, requireActivity(), 3)
 
         favoritesRecyclerCatalogFilm = view.findViewById(R.id.favorites_recycler_catalog_film)
 
