@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.HomeCatalogFilmAdapter.ItemFilmHolder
+import com.bumptech.glide.Glide
 
 class HomeCatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickListener) :
     RecyclerView.Adapter<ItemFilmHolder>() {
@@ -44,7 +45,7 @@ class HomeCatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickLis
 
             film?.let { it ->
                 title.text = it.title
-                poster.setImageResource(it.poster)
+                Glide.with(itemView).load(it.poster).centerCrop().into(poster)
                 rating.text = it.rating.toString()
                 year.text = it.year.year.toString()
                 favorites.setImageResource(if (it.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)

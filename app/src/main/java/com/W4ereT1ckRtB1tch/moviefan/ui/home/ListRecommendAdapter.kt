@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
+import com.bumptech.glide.Glide
 
 class ListRecommendAdapter : RecyclerView.Adapter<ListRecommendAdapter.ListRecommendHolder>() {
 
@@ -27,7 +28,7 @@ class ListRecommendAdapter : RecyclerView.Adapter<ListRecommendAdapter.ListRecom
 
         fun onBindItemFilm(film: Film?) {
             film?.let {
-                poster.setImageResource(film.poster)
+                Glide.with(itemView).load(it.poster).centerCrop().into(poster)
             }
         }
     }

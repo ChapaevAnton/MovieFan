@@ -16,12 +16,13 @@ import com.W4ereT1ckRtB1tch.moviefan.MainActivity
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.DataBase
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class FilmDetailsFragment : Fragment() {
 
-    private lateinit var film: Film
+    private var film: Film? = null
 
     private lateinit var fabRotateClock: Animation
     private lateinit var fabRotateAntiClock: Animation
@@ -59,11 +60,11 @@ class FilmDetailsFragment : Fragment() {
         detailsShareFab = view.findViewById(R.id.details_share_film_fab)
         detailsFab = view.findViewById(R.id.details_film_fab)
 
-        film.apply {
-            detailsTitle.title = title
-            detailsPoster.setImageResource(poster)
-            detailsDescription.text = description
-            detailsFavoriteFab.setImageResource(if (film.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)
+        film?.let {
+            detailsTitle.title = it.title
+            Glide.with(view).load(it.poster).centerCrop().into(detailsPoster)
+            detailsDescription.text = it.description
+            detailsFavoriteFab.setImageResource(if (it.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)
         }
 
         //кнопка действия fab
@@ -73,12 +74,14 @@ class FilmDetailsFragment : Fragment() {
 
         //добавить в избранное
         detailsFavoriteFab.setOnClickListener {
-            if (film.isFavorites) {
-                film.isFavorites = false
-                detailsFavoriteFab.setImageResource(R.drawable.ic_round_favorite_border_24)
-            } else {
-                film.isFavorites = true
-                detailsFavoriteFab.setImageResource(R.drawable.ic_round_favorite_24)
+            film?.let {
+                if (it.isFavorites) {
+                    it.isFavorites = false
+                    detailsFavoriteFab.setImageResource(R.drawable.ic_round_favorite_border_24)
+                } else {
+                    it.isFavorites = true
+                    detailsFavoriteFab.setImageResource(R.drawable.ic_round_favorite_24)
+                }
             }
             Log.d("TAG", "DataBase: ${DataBase.filmDataBase}")
         }
@@ -90,10 +93,10 @@ class FilmDetailsFragment : Fragment() {
                 putExtra(
                     Intent.EXTRA_TEXT,
                     "Обязательно посмотри этот фильм:\n" +
-                            "Название \"${film.title}\"\n" +
-                            "Описание: ${film.description}\n" +
-                            "Год выпуска: ${film.year.year}\n" +
-                            "Рейтинг: ${film.rating}"
+                            "Название \"${film?.title}\"\n" +
+                            "Описание: ${film?.description}\n" +
+                            "Год выпуска: ${film?.year?.year}\n" +
+                            "Рейтинг: ${film?.rating}"
                 )
                 type = "text/plain"
             }
