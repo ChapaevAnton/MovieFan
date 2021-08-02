@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             findViewById<BottomNavigationView>(R.id.main_menu_navigation_bottom_bar)
 
         //обработчик выбора пунктов меню Navigation Bottom
-        menuMainNavigationBottom.setOnNavigationItemSelectedListener { item ->
+        menuMainNavigationBottom.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.main_menu_home -> {
                     switchFragmentMenu(
@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
 
     //кнопка назад
     override fun onBackPressed() {
+        Log.d("TAG", "onBackPressed: ${supportFragmentManager.backStackEntryCount}")
         if (supportFragmentManager.backStackEntryCount == 0) showExitDialog() else super.onBackPressed()
     }
 
@@ -100,6 +101,8 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.main_fragment_container, filmDetailsFragment)
             .addToBackStack(null)
             .commit()
+        Log.d("TAG", "launchFilmDetailsFragment: ${supportFragmentManager.backStackEntryCount}")
+        supportFragmentManager
     }
 
     //функция отображения SnackBar с заданной позицией и цветом
