@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/film_details_fragment_root"
     tools:context=".ui.details.FilmDetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
