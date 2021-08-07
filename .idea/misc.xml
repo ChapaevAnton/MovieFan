@@ -3,17 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/drawable/background_shape_fragment.xml" value="0.36256410256410254" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/drawable/ic_app_icon_24.xml" value="0.36256410256410254" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/drawable/ic_round_catalog_24.xml" value="0.36256410256410254" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/drawable/ic_round_favorite_24.xml" value="0.36256410256410254" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/layout/activity_main.xml" value="0.14074074074074075" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/layout/fragment_favorites.xml" value="0.19635416666666666" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/layout/fragment_home.xml" value="0.32314814814814813" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/layout/fragment_item_film_details.xml" value="0.19635416666666666" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/layout/fragment_selections.xml" value="0.19635416666666666" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/layout/nested_view_item_film_details.xml" value="0.19635416666666666" />
-        <entry key="..\:/SKILLFACTORY/MovieFan/app/src/main/res/menu/menu_main_navigation_bottom_bar.xml" value="0.19635416666666666" />
+        <entry key="..\:/MYDEV/SKILLFACTORY/MovieFan/app/src/main/res/drawable/ic_round_favorite_24.xml" value="0.2861111111111111" />
+        <entry key="..\:/MYDEV/SKILLFACTORY/MovieFan/app/src/main/res/drawable/ic_round_favorite_border_24.xml" value="0.2861111111111111" />
+        <entry key="..\:/MYDEV/SKILLFACTORY/MovieFan/app/src/main/res/layout/activity_main.xml" value="0.3177083333333333" />
+        <entry key="..\:/MYDEV/SKILLFACTORY/MovieFan/app/src/main/res/layout/fragment_home.xml" value="0.3177083333333333" />
+        <entry key="..\:/MYDEV/SKILLFACTORY/MovieFan/app/src/main/res/layout/fragment_selections.xml" value="0.3177083333333333" />
+        <entry key="..\:/MYDEV/SKILLFACTORY/MovieFan/app/src/main/res/layout/item_film.xml" value="0.45585585585585586" />
       </map>
     </option>
   </component>
