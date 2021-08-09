@@ -88,13 +88,14 @@
             app:layout_constraintVertical_bias="0.0"
             tools:text="@tools:sample/lorem" />
 
-        <com.W4ereT1ckRtB1tch.moviefan.ui.custom.view.RatingRoundView
+        <com.W4ereT1ckRtB1tch.moviefan.ui.custom.view.RatingCircleView
+            android:id="@+id/rating_circle_film"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideline_film_1"
-            app:stroke_round="10"
             app:progress="50"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
+            app:stroke_round="10" />
 
 
         <ImageView

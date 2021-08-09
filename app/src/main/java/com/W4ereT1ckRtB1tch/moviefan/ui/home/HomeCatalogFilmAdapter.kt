@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.W4ereT1ckRtB1tch.moviefan.R
 import com.W4ereT1ckRtB1tch.moviefan.data.Film
+import com.W4ereT1ckRtB1tch.moviefan.ui.custom.view.RatingCircleView
 import com.W4ereT1ckRtB1tch.moviefan.ui.home.HomeCatalogFilmAdapter.ItemFilmHolder
 import com.bumptech.glide.Glide
 
@@ -37,6 +38,7 @@ class HomeCatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickLis
         private val title: TextView = itemFilm.findViewById(R.id.title_film)
         private val poster: ImageView = itemFilm.findViewById(R.id.poster_film)
         private val rating: TextView = itemFilm.findViewById(R.id.rating_film)
+        private val ratingCircle: RatingCircleView = itemFilm.findViewById(R.id.rating_circle_film)
         private val year: TextView = itemFilm.findViewById(R.id.year_film)
         private val favorites: ImageView = itemFilm.findViewById(R.id.favorites_film)
 
@@ -47,6 +49,7 @@ class HomeCatalogFilmAdapter(private val onItemClickListener: OnItemFilmClickLis
                 title.text = it.title
                 Glide.with(itemView).load(it.poster).centerCrop().into(poster)
                 rating.text = it.rating.toString()
+                ratingCircle.setProgress(it.rating.times(10).toInt())
                 year.text = it.year.year.toString()
                 favorites.setImageResource(if (it.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)
             }

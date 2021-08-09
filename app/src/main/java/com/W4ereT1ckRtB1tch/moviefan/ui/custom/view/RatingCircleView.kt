@@ -7,7 +7,7 @@ import android.view.View
 import com.W4ereT1ckRtB1tch.moviefan.R
 import kotlin.math.min
 
-class RatingRoundView @JvmOverloads constructor(
+class RatingCircleView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null
 ) :
@@ -24,12 +24,12 @@ class RatingRoundView @JvmOverloads constructor(
     private var progress = 50
 
     private var background = Color.DKGRAY //цвет фона
-    private var ratingShadow = Color.DKGRAY //цвет тени рейтинга
+    private var digitRatingShadow = Color.DKGRAY //цвет тени рейтинга
 
 
     private lateinit var backgroundPaint: Paint //краска для фона
-    private lateinit var ratingPaint: Paint //краска для рейтинга
-    private lateinit var roundPaint: Paint //краска для кольца прогресса
+    private lateinit var digitRatingPaint: Paint //краска для рейтинга
+    private lateinit var circleRatingPaint: Paint //краска для кольца прогресса
 
     init {
         val attr =
@@ -47,6 +47,13 @@ class RatingRoundView @JvmOverloads constructor(
     }
 
 
+    fun setProgress(progress: Int){
+        this.progress = progress
+        initPaint() //обновляем краски
+        invalidate() //перерисовыем View
+    }
+
+
     private fun initPaint() {
 
         backgroundPaint = Paint().apply {
@@ -56,18 +63,20 @@ class RatingRoundView @JvmOverloads constructor(
         }
 
 
-        ratingPaint = Paint().apply {
+        digitRatingPaint = Paint().apply {
 
             style = Paint.Style.FILL_AND_STROKE
-            setShadowLayer(5f, 0f, 0f, ratingShadow)
+            setShadowLayer(5f, 0f, 0f, digitRatingShadow)
             strokeWidth = 2f
-            textSize = scaleSize
+            textSize = scaleSize * 0.75f
             typeface = Typeface.SANS_SERIF
             color = getColorPaint(progress)
             isAntiAlias = true
+
+
         }
 
-        roundPaint = Paint().apply {
+        circleRatingPaint = Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = stroke
             color = getColorPaint(progress)
@@ -103,23 +112,50 @@ class RatingRoundView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
 
-        drawRound(canvas) //кольцо прогресса
+        drawCircle(canvas) //рейтинг кольцо
+
+        drawDigit(canvas) // рейтинг цифра
+
     }
 
-    private fun drawRound(canvas: Canvas?) {
-        val scale = radius * 0.8f
-        oval.set(0f - scale, 0f - scale, scale, scale)
+    private fun drawCircle(canvas: Canvas?) {
+        val centerOffset = radius * 0.8f
+        oval.set(-centerOffset, -centerOffset, centerOffset, centerOffset)
 
         canvas?.let {
             it.save()
             it.translate(centerX, centerY)
             it.drawCircle(0f, 0f, radius, backgroundPaint)
-            it.drawArc(oval, -90f, convertProgressToDegrees(progress), false, roundPaint)
+            it.drawArc(oval, -90f, convertProgressToDegrees(progress), false, circleRatingPaint)
             it.restore()
         }
     }
 
-    private fun getColorPaint(progress: Int) = when (progress) {
+    private fun drawDigit(canvas: Canvas?) {
+
+        val text = String.format("%.1f", progress / 10f)
+        drawTextCenter(canvas, text, digitRatingPaint)
+
+    }
+
+    private fun drawTextCenter(canvas: Canvas?, text: String, paint: Paint) {
+
+        val rect = Rect()
+        canvas?.getClipBounds(rect)
+
+        val canvasWidth = rect.width()
+        val canvasHeight = rect.height()
+
+        paint.textAlign = Paint.Align.LEFT
+        paint.getTextBounds(text, 0, text.length, rect)
+
+        val x = canvasWidth / 2f - rect.width() / 2f - rect.left
+        val y = canvasHeight / 2f + rect.height() / 2f - rect.bottom
+
+        canvas?.drawText(text, x, y, paint)
+    }
+
+    private fun getColorPaint(progress: Int): Int = when (progress) {
         in 0..25 -> Color.parseColor("#e84258")
         in 26..50 -> Color.parseColor("#fd8060")
         in 51..75 -> Color.parseColor("#fee191")
