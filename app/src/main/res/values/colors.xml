@@ -13,6 +13,7 @@
     <color name="ivi_blue_dark">#100E19</color>
     <color name="ivi_head_menu_end">#1F1B2E</color>
     <color name="ivi_blue">#1f1a2e</color>
+    <color name="ivi_blue_light">#302A45</color>
     <color name="ivi_red">#EA0042</color>
 
 </resources>

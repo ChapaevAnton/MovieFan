@@ -20,10 +20,11 @@ class RatingCircleView @JvmOverloads constructor(
     private var radius = 0f
     private val scaleSize = 60f
 
-    private var stroke = 10f
+    private var stroke = 5f
     private var progress = 50
 
     private var background = Color.DKGRAY //цвет фона
+    private var backgroundShadow = Color.BLACK //тень фона
     private var digitRatingShadow = Color.DKGRAY //цвет тени рейтинга
 
 
@@ -36,8 +37,15 @@ class RatingCircleView @JvmOverloads constructor(
             context.theme.obtainStyledAttributes(attributeSet, R.styleable.RatingRoundView, 0, 0)
 
         try {
-            stroke = attr.getFloat(R.styleable.RatingRoundView_stroke_round, stroke)
+            stroke =
+                attr.getDimensionPixelSize(R.styleable.RatingRoundView_stroke_round, stroke.toInt())
+                    .toFloat()
             progress = attr.getInt(R.styleable.RatingRoundView_progress, progress)
+            background = attr.getColor(R.styleable.RatingRoundView_background_color, background)
+            backgroundShadow =
+                attr.getColor(R.styleable.RatingRoundView_background_shadow_color, backgroundShadow)
+            digitRatingShadow =
+                attr.getColor(R.styleable.RatingRoundView_digit_shadow_color, digitRatingShadow)
         } finally {
             attr.recycle()
         }
@@ -47,7 +55,7 @@ class RatingCircleView @JvmOverloads constructor(
     }
 
 
-    fun setProgress(progress: Int){
+    fun setProgress(progress: Int) {
         this.progress = progress
         initPaint() //обновляем краски
         invalidate() //перерисовыем View
@@ -58,6 +66,7 @@ class RatingCircleView @JvmOverloads constructor(
 
         backgroundPaint = Paint().apply {
             style = Paint.Style.FILL
+            setShadowLayer(5f, 0f, 0f, backgroundShadow)
             color = background
             isAntiAlias = true
         }
@@ -172,4 +181,5 @@ class RatingCircleView @JvmOverloads constructor(
     private fun convertProgressToDegrees(progress: Int): Float {
         return progress * 3.6f
     }
+
 }

@@ -2,8 +2,11 @@
 <resources>
 
     <declare-styleable name="RatingRoundView">
-        <attr name="stroke_round" format="float" />
+        <attr name="stroke_round" format="dimension" />
         <attr name="progress" format="integer" />
+        <attr name="background_color" format="color"/>
+        <attr name="background_shadow_color" format="color"/>
+        <attr name="digit_shadow_color" format="color"/>
     </declare-styleable>
 
 </resources>

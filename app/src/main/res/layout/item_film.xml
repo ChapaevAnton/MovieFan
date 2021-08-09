@@ -63,7 +63,7 @@
             tools:text="@tools:sample/lorem" />
 
         <TextView
-            android:id="@+id/rating_film"
+            android:id="@+id/year_film"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -75,28 +75,22 @@
             app:layout_constraintVertical_bias="0.0"
             tools:text="@tools:sample/lorem" />
 
-        <TextView
-            android:id="@+id/year_film"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_film_1"
-            app:layout_constraintTop_toBottomOf="@id/rating_film"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="@tools:sample/lorem" />
 
         <com.W4ereT1ckRtB1tch.moviefan.ui.custom.view.RatingCircleView
             android:id="@+id/rating_circle_film"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            app:background_color="@color/ivi_blue_light"
+            app:background_shadow_color="@color/ivi_blue_dark"
+            app:digit_shadow_color="@color/ivi_blue_dark"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/guideline_film_1"
+            app:layout_constraintTop_toBottomOf="@+id/year_film"
+            app:layout_constraintVertical_bias="1.0"
             app:progress="50"
-            app:stroke_round="10" />
-
+            app:stroke_round="4dp"/>
 
         <ImageView
             android:id="@+id/favorites_film"
