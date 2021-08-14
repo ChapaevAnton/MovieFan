@@ -73,11 +73,9 @@ class SelectionsFragment : Fragment() {
         })
     }
 
-
     override fun onResume() {
         super.onResume()
         selectionCatalogFilmAdapter.updateItems(DataBase.filmDataBase)
     }
-
 
 }

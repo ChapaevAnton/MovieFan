@@ -29,11 +29,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //добавление default фрагмента
         val fragmentManager = supportFragmentManager
         var fragment: Fragment? = fragmentManager.findFragmentById(R.id.main_fragment_container)
-
         if (fragment == null) {
             fragment = HomeFragment()
             fragmentManager.beginTransaction()
@@ -43,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         //нижнее меню
         val menuMainNavigationBottom =
             findViewById<BottomNavigationView>(R.id.main_menu_navigation_bottom_bar)
-
         //обработчик выбора пунктов меню Navigation Bottom
         menuMainNavigationBottom.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -82,13 +79,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     //кнопка назад
     override fun onBackPressed() {
         Log.d("TAG", "onBackPressed: ${supportFragmentManager.backStackEntryCount}")
         if (supportFragmentManager.backStackEntryCount == 0) showExitDialog() else super.onBackPressed()
     }
-
     //функция открытия и передачи данных фрагменту FilmDetailsFragment
     fun launchFilmDetailsFragment(film: Film) {
         val bundle = Bundle()
@@ -104,7 +99,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("TAG", "launchFilmDetailsFragment: ${supportFragmentManager.backStackEntryCount}")
         supportFragmentManager
     }
-
     //функция отображения SnackBar с заданной позицией и цветом
     fun showSnackBar(text: Int) {
         val viewSnackBar = findViewById<CoordinatorLayout>(R.id.main_frame_snack_bar)
@@ -135,7 +129,6 @@ class MainActivity : AppCompatActivity() {
         exitDialog.setCanceledOnTouchOutside(false)
         exitDialog.show()
     }
-
     //выбор фрагментов раздела контейнера
     private fun switchFragmentMenu(fragment: Fragment, tag: String) {
         Log.d("TAG", "switchFragmentMenu: $tag")
@@ -143,7 +136,6 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.main_fragment_container, fragment, tag)
             .commit()
-
     }
 
     private fun checkFragmentExistence(tag: String): Fragment? {

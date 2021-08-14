@@ -16,7 +16,6 @@ class SelectionCatalogFilmAdapter(private val onItemFilmClickListener: OnItemFil
 
     private var listItems = listOf<Film>()
 
-
     fun addItems(listItems: List<Film>) {
         this.listItems = listItems
     }
@@ -25,7 +24,6 @@ class SelectionCatalogFilmAdapter(private val onItemFilmClickListener: OnItemFil
         this.listItems = listItems
         notifyDataSetChanged()
     }
-
 
     fun interface OnItemFilmClickListener {
         fun onClickItem(film: Film)

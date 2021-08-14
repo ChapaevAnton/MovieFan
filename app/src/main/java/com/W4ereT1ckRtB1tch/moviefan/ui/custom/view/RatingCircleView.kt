@@ -14,20 +14,15 @@ class RatingCircleView @JvmOverloads constructor(
     View(context, attributeSet) {
 
     private val oval = RectF()
-
     private var centerX = 0f
     private var centerY = 0f
     private var radius = 0f
     private val scaleSize = 60f
-
     private var stroke = 5f
     private var progress = 50
-
     private var background = Color.DKGRAY //цвет фона
     private var backgroundShadow = Color.BLACK //тень фона
     private var digitRatingShadow = Color.DKGRAY //цвет тени рейтинга
-
-
     private lateinit var backgroundPaint: Paint //краска для фона
     private lateinit var digitRatingPaint: Paint //краска для рейтинга
     private lateinit var circleRatingPaint: Paint //краска для кольца прогресса
@@ -49,18 +44,14 @@ class RatingCircleView @JvmOverloads constructor(
         } finally {
             attr.recycle()
         }
-
-
         initPaint()
     }
-
 
     fun setProgress(progress: Int) {
         this.progress = progress
         initPaint() //обновляем краски
         invalidate() //перерисовыем View
     }
-
 
     private fun initPaint() {
 
@@ -71,7 +62,6 @@ class RatingCircleView @JvmOverloads constructor(
             isAntiAlias = true
         }
 
-
         digitRatingPaint = Paint().apply {
 
             style = Paint.Style.FILL_AND_STROKE
@@ -81,8 +71,6 @@ class RatingCircleView @JvmOverloads constructor(
             typeface = Typeface.SANS_SERIF
             color = getColorPaint(progress)
             isAntiAlias = true
-
-
         }
 
         circleRatingPaint = Paint().apply {
@@ -91,8 +79,6 @@ class RatingCircleView @JvmOverloads constructor(
             color = getColorPaint(progress)
             isAntiAlias = true
         }
-
-
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -103,28 +89,20 @@ class RatingCircleView @JvmOverloads constructor(
 
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
         val widthSize = MeasureSpec.getSize(widthMeasureSpec)
-
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
         val heightSize = MeasureSpec.getSize(heightMeasureSpec)
-
         val chooseWidth = getDimension(widthMode, widthSize)
         val chooseHeight = getDimension(heightMode, heightSize)
-
         val minSide = min(chooseWidth, chooseHeight)
-
         centerX = minSide.div(2f)
         centerY = minSide.div(2f)
-
         setMeasuredDimension(minSide, minSide)
-
     }
 
     override fun onDraw(canvas: Canvas?) {
 
         drawCircle(canvas) //рейтинг кольцо
-
         drawDigit(canvas) // рейтинг цифра
-
     }
 
     private fun drawCircle(canvas: Canvas?) {
@@ -141,26 +119,20 @@ class RatingCircleView @JvmOverloads constructor(
     }
 
     private fun drawDigit(canvas: Canvas?) {
-
         val text = String.format("%.1f", progress / 10f)
         drawTextCenter(canvas, text, digitRatingPaint)
-
     }
 
     private fun drawTextCenter(canvas: Canvas?, text: String, paint: Paint) {
 
         val rect = Rect()
         canvas?.getClipBounds(rect)
-
         val canvasWidth = rect.width()
         val canvasHeight = rect.height()
-
         paint.textAlign = Paint.Align.LEFT
         paint.getTextBounds(text, 0, text.length, rect)
-
         val x = canvasWidth / 2f - rect.width() / 2f - rect.left
         val y = canvasHeight / 2f + rect.height() / 2f - rect.bottom
-
         canvas?.drawText(text, x, y, paint)
     }
 

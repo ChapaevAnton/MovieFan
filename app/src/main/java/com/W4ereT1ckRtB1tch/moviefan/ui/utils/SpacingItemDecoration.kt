@@ -14,6 +14,5 @@ class SpacingItemDecoration (private val paddingInDp: Int): RecyclerView.ItemDec
         outRect.top = paddingInDp.convertPx
         outRect.right = paddingInDp.convertPx
         outRect.left = paddingInDp.convertPx
-
     }
 }

@@ -23,10 +23,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class FilmDetailsFragment : Fragment() {
 
     private var film: Film? = null
-
     private lateinit var fabRotateClock: Animation
     private lateinit var fabRotateAntiClock: Animation
-
     private lateinit var detailsFavoriteFab: FloatingActionButton
     private lateinit var detailsShareFab: FloatingActionButton
     private lateinit var detailsFab: FloatingActionButton
@@ -34,7 +32,6 @@ class FilmDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         film = arguments?.get(MainActivity.ITEM_FILM_DETAILS) as Film
-
         fabRotateClock =
             AnimationUtils.loadAnimation(requireContext(), R.anim.fab_rotate_clock_animation)
         fabRotateAntiClock =
@@ -102,7 +99,6 @@ class FilmDetailsFragment : Fragment() {
             }
             startActivity(intent)
         }
-
     }
 
     private fun onClickDetailsFub() {
@@ -115,7 +111,6 @@ class FilmDetailsFragment : Fragment() {
             detailsShareFab.show()
             detailsFab.startAnimation(fabRotateAntiClock)
         }
-
     }
 
 }
