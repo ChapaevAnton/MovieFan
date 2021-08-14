@@ -38,7 +38,6 @@ class MainActivityTest {
         )
     }
 
-
     @Test
     fun allNavigationBottomMenuDestinationsShouldWork() {
         onView(withId(R.id.main_menu_home)).perform(click())
@@ -84,7 +83,6 @@ class MainActivityTest {
         onView(withId(R.id.details_description_film)).perform(swipeDown())
     }
 
-
     @Test
     fun addFilmToFavoritesButtonClickable() {
         onView(withId(R.id.home_recycler_catalog_film)).check(matches(isDisplayed()))
@@ -123,5 +121,4 @@ class MainActivityTest {
             }
         }
     }
-
 }

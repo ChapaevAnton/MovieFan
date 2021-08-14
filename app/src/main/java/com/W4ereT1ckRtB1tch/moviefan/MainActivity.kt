@@ -143,7 +143,6 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.main_fragment_container, fragment, tag)
             .commit()
-
     }
 
     private fun checkFragmentExistence(tag: String): Fragment? {

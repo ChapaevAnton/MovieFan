@@ -65,7 +65,6 @@ class HomeFragment : Fragment() {
             adapter = listRecommendAdapter
             addItemDecoration(itemDecoratorMini)
         }
-
         //список фильмов основной
         homeRecyclerCatalogFilm = view.findViewById(R.id.home_recycler_catalog_film)
         //иницилизирем список
@@ -74,7 +73,6 @@ class HomeFragment : Fragment() {
             adapter = homeCatalogFilmAdapter
             addItemDecoration(itemDecorator)
         }
-
         //обработчик выбора пунктов меню Top Bar
         mainMenuTopBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -85,7 +83,6 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
-
     }
 
     override fun onResume() {
@@ -93,5 +90,4 @@ class HomeFragment : Fragment() {
         Log.d("TAG", "onResume: HomeFragment")
         homeCatalogFilmAdapter.updateDataItems(DataBase.filmDataBase)
     }
-
 }

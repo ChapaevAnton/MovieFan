@@ -40,15 +40,12 @@ class FavoritesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("TAG", "onViewCreated: FavoritesFragment")
         //анимация открытия фрагмента
         AnimationHelper.performFragmentCircularRevealAnimation(view, requireActivity(), 3)
-
         favoritesRecyclerCatalogFilm = view.findViewById(R.id.favorites_recycler_catalog_film)
-
         //иницилизирем список
         favoritesRecyclerCatalogFilm.apply {
             //устанавливаем адаптер

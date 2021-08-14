@@ -8,13 +8,11 @@ import kotlin.concurrent.schedule
 
 class SplashScreen : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         startApp()
     }
-
 
     private fun startApp() {
         val intent = Intent(this, MainActivity::class.java)
@@ -23,6 +21,5 @@ class SplashScreen : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
     }
 }

@@ -22,10 +22,8 @@ object AnimationHelper {
 
                         val itemCenter = rootView.width / (MENU_ITEMS * 2)
                         val step = (itemCenter * 2) * (position - 1) + itemCenter
-
                         val x: Int = step
                         val y: Int = rootView.y.roundToInt() + rootView.height
-
                         val startRadius = 0f
                         val endRadius = hypot(rootView.width.toFloat(), rootView.height.toFloat())
                         val animation = ViewAnimationUtils.createCircularReveal(

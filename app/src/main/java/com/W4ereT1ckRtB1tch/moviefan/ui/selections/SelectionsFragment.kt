@@ -26,7 +26,6 @@ class SelectionsFragment : Fragment() {
             (requireActivity() as MainActivity).launchFilmDetailsFragment(film)
         }
         selectionCatalogFilmAdapter.addItems(DataBase.filmDataBase)
-
         itemDecorator = SpacingItemDecoration(10)
 
     }
@@ -43,22 +42,18 @@ class SelectionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //анимация открытия фрагмента
         AnimationHelper.performFragmentCircularRevealAnimation(view, requireActivity(), 2)
-
         selectionRecyclerCatalogFilm = view.findViewById(R.id.selections_recycler_catalog_film)
         val selectionsSearch = view.findViewById<SearchView>(R.id.selections_search_top_bar)
-
         selectionRecyclerCatalogFilm.apply {
             adapter = selectionCatalogFilmAdapter
             addItemDecoration(itemDecorator)
         }
-
         selectionsSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
                 newText?.let {
                     if (it.isEmpty()) {
                         selectionCatalogFilmAdapter.updateItems(DataBase.filmDataBase)
@@ -73,11 +68,8 @@ class SelectionsFragment : Fragment() {
         })
     }
 
-
     override fun onResume() {
         super.onResume()
         selectionCatalogFilmAdapter.updateItems(DataBase.filmDataBase)
     }
-
-
 }

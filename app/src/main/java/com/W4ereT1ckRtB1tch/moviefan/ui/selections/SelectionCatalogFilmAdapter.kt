@@ -16,7 +16,6 @@ class SelectionCatalogFilmAdapter(private val onItemFilmClickListener: OnItemFil
 
     private var listItems = listOf<Film>()
 
-
     fun addItems(listItems: List<Film>) {
         this.listItems = listItems
     }
@@ -25,7 +24,6 @@ class SelectionCatalogFilmAdapter(private val onItemFilmClickListener: OnItemFil
         this.listItems = listItems
         notifyDataSetChanged()
     }
-
 
     fun interface OnItemFilmClickListener {
         fun onClickItem(film: Film)
@@ -47,7 +45,6 @@ class SelectionCatalogFilmAdapter(private val onItemFilmClickListener: OnItemFil
                 year.text = film.year.year.toString()
                 favorites.setImageResource(if (film.isFavorites) R.drawable.ic_round_favorite_24 else R.drawable.ic_round_favorite_border_24)
             }
-
             itemView.setOnClickListener {
                 if (film != null) {
                     onItemFilmClickListener.onClickItem(film)
