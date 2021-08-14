@@ -4,40 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ivi_red"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/temp_color1"
-        app:layout_constraintBottom_toTopOf="@+id/menu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <LinearLayout
-        android:id="@+id/menu"
+    <!-- Container for SnackBar -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/main_frame_snack_bar"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="50dp"
-        android:background="@color/temp_color2"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintBottom_toTopOf="@+id/main_menu_navigation_bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <!-- main fragment container-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_home" />
 
-    <FrameLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/temp_color1"
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- Bottom navigation menu main-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/main_menu_navigation_bottom_bar"
+        style="@style/Widget.App.BottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu" />
+        app:layout_constraintTop_toBottomOf="@id/main_frame_snack_bar"
+        app:menu="@menu/menu_main_navigation_bottom_bar" />
+    <!-- Bottom navigation menu main-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
