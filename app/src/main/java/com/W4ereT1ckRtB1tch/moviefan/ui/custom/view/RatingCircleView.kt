@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.res.use
 import com.W4ereT1ckRtB1tch.moviefan.R
 import kotlin.math.min
 
@@ -17,7 +18,6 @@ class RatingCircleView @JvmOverloads constructor(
     private var centerX = 0f
     private var centerY = 0f
     private var radius = 0f
-    private val scaleSize = 60f
     private var stroke = 5f
     private var progress = 50
     private var background = Color.DKGRAY //цвет фона
@@ -27,23 +27,29 @@ class RatingCircleView @JvmOverloads constructor(
     private lateinit var digitRatingPaint: Paint //краска для рейтинга
     private lateinit var circleRatingPaint: Paint //краска для кольца прогресса
 
+    companion object {
+        private const val DEFAULT_SIZE_VIEW = 300 //размер view по умолчанию
+        private const val DEFAULT_SCALE = 60f //минимальный размер элемента
+        private const val DEFAULT_SCALE_RADIUS = 0.8f //масштаб кольца прогресса
+        private const val DEFAULT_SCALE_TEXT_SIZE = 0.75f //масштаб рейтинга
+    }
+
     init {
         val attr =
             context.theme.obtainStyledAttributes(attributeSet, R.styleable.RatingRoundView, 0, 0)
 
-        try {
+        attr.use {
             stroke =
-                attr.getDimensionPixelSize(R.styleable.RatingRoundView_stroke_round, stroke.toInt())
+                it.getDimensionPixelSize(R.styleable.RatingRoundView_stroke_round, stroke.toInt())
                     .toFloat()
-            progress = attr.getInt(R.styleable.RatingRoundView_progress, progress)
-            background = attr.getColor(R.styleable.RatingRoundView_background_color, background)
+            progress = it.getInt(R.styleable.RatingRoundView_progress, progress)
+            background = it.getColor(R.styleable.RatingRoundView_background_color, background)
             backgroundShadow =
-                attr.getColor(R.styleable.RatingRoundView_background_shadow_color, backgroundShadow)
+                it.getColor(R.styleable.RatingRoundView_background_shadow_color, backgroundShadow)
             digitRatingShadow =
-                attr.getColor(R.styleable.RatingRoundView_digit_shadow_color, digitRatingShadow)
-        } finally {
-            attr.recycle()
+                it.getColor(R.styleable.RatingRoundView_digit_shadow_color, digitRatingShadow)
         }
+
         initPaint()
     }
 
@@ -67,7 +73,7 @@ class RatingCircleView @JvmOverloads constructor(
             style = Paint.Style.FILL_AND_STROKE
             setShadowLayer(5f, 0f, 0f, digitRatingShadow)
             strokeWidth = 2f
-            textSize = scaleSize * 0.75f
+            textSize = DEFAULT_SCALE * DEFAULT_SCALE_TEXT_SIZE
             typeface = Typeface.SANS_SERIF
             color = getColorPaint(progress)
             isAntiAlias = true
@@ -106,7 +112,7 @@ class RatingCircleView @JvmOverloads constructor(
     }
 
     private fun drawCircle(canvas: Canvas?) {
-        val centerOffset = radius * 0.8f
+        val centerOffset = radius * DEFAULT_SCALE_RADIUS
         oval.set(-centerOffset, -centerOffset, centerOffset, centerOffset)
 
         canvas?.let {
@@ -146,7 +152,7 @@ class RatingCircleView @JvmOverloads constructor(
     private fun getDimension(mode: Int, size: Int): Int {
         return when (mode) {
             MeasureSpec.AT_MOST, MeasureSpec.EXACTLY -> size
-            else -> 300
+            else -> DEFAULT_SIZE_VIEW
         }
     }
 
